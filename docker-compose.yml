@@ -1,0 +1,167 @@
+version: '2.2'
+
+services:
+
+
+  Confluence1:
+    container_name: Confluence
+    image: vulhub/confluence:6.10.2
+    ports:
+      - "8090:8090"
+    depends_on:
+      - db
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.3    
+ 
+  db:
+    image: postgres:10.7-alpine
+    environment: 
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=confluence
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.4
+
+  
+  rocketchat:
+    container_name: RocketChat
+    image: vulhub/rocketchat:3.12.1
+    command: >
+      bash -c
+        "for i in `seq 1 30`; do
+          node main.js &&
+          s=$$? && break || s=$$?;
+          echo \"Tried $$i times. Waiting 5 secs...\";
+          sleep 5;
+        done; (exit $$s)"
+    restart: unless-stopped
+    environment:
+      - PORT=9000
+      - ROOT_URL=http://localhost:3000
+      - MONGO_URL=mongodb://mongo:27017/rocketchat
+      - MONGO_OPLOG_URL=mongodb://mongo:27017/local
+      - MAIL_URL=smtp://smtp.email
+    depends_on:
+      - mongo
+    ports:
+      - 9000:9000
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.5
+
+
+  mongo:
+    container_name: mongo
+    image: mongo:4.0
+    restart: unless-stopped
+    command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
+    labels:
+      - "traefik.enable=false"
+
+  # this container's job is just run the command to initialize the replica set.
+  # it will run the command and remove himself (it will not stay running)
+  mongo-init-replica:
+    image: mongo:4.0
+    command: >
+      bash -c
+        "for i in `seq 1 30`; do
+          mongo mongo/rocketchat --eval \"
+            rs.initiate({
+              _id: 'rs0',
+              members: [ { _id: 0, host: 'localhost:27017' } ]})\" &&
+          s=$$? && break || s=$$?;
+          echo \"Tried $$i times. Waiting 5 secs...\";
+          sleep 5;
+        done; (exit $$s)"
+    depends_on:
+      - mongo
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.6
+
+
+
+  weblogic:
+    container_name: weblogic
+    image: vulhub/weblogic:12.2.1.3-2018
+    ports:
+      - "7001:7001"
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.7
+
+
+#  jenkins:
+#    container_name: jenkins
+#    image: vulhub/jenkins:2.138
+#    ports:
+#      - "50000:50000"
+#      - "8080:8080"
+#    init: true
+#    networks:
+#      my-net:
+#        ipv4_address: 10.0.0.8
+
+#  dsvw:
+#    container_name: dsvw
+#    image: appsecco/dsvw
+#    ports:
+#      - "1234:8000"
+#    networks:
+#      my-net:
+#        ipv4_address: 10.0.0.9
+
+
+  tomcat:
+    container_name: tomcat
+    image: vulhub/tomcat:9.0.30
+    ports:
+      - "9060:8080"
+      - "8009:8009"
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.10
+
+
+  mutillidae:
+    image: citizenstig/nowasp
+    ports:
+      - "80:80"  
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.11
+
+
+  CVE-2019-6340:
+    container_name: cve-2019-6340
+    image: knqyf263/cve-2019-6340
+    ports:
+      - 8080:80
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.12
+
+
+  cve-2017-5638:
+    image: jrrdev/cve-2017-5638
+    ports:
+      - "8081:8080"
+    networks:
+      my-net:
+        ipv4_address: 10.0.0.13
+
+
+
+
+############################################################
+networks: 
+  my-net:
+    name: my-net
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.0.0.0/24"
+############################################################
+
+
