@@ -1,6 +1,10 @@
-For Educational Purpose Only!
-This is what I did 
+! For Educational Purpose Only!
+This is what I did! 
 Downloaded Oracle VM virtual Box
-Downloaded Kali Linux from https://www.kali.org/get-kali/#kali-virtual-machines
+Downloaded Kali Linux from:
+       https://www.kali.org/get-kali/#kali-virtual-machines
 Then uploaded the Kali Linux to Virtual Box
-In Kali Linux, Opened terminal downloaded Docker from https://www.kali.org/docs/containers/installing-docker-on-kali/
+In Kali Linux, Opened terminal downloaded Docker from :
+       https://www.kali.org/docs/containers/installing-docker-on-kali/
+Download Docker-compose to run docker-compose.yml file, use the referenece page below:
+       https://docs.docker.com/compose/install/linux/
