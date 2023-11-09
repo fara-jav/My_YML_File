@@ -27,7 +27,9 @@ or see below for images of the exploit.
 
 ### Tomcat ghostcat vulnerability
 
-Use container with tomcat from my docker-compose file [Tomcat] ![Screenshot 2023-11-08 224652-1](https://github.com/fara-jav/My_YML_File/assets/149855687/284b309e-07e4-4d7f-94a8-9c29e5c95deb)
+Use container with tomcat from my docker-compose file 
+
+![Screenshot 2023-11-08 224652-1](https://github.com/fara-jav/My_YML_File/assets/149855687/284b309e-07e4-4d7f-94a8-9c29e5c95deb)
 
 
 
