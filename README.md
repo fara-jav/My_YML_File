@@ -1,8 +1,7 @@
-# MY_YML_FILE
+-# MY_YML_FILE
 
-## DISCLAIMER
 
-**!! FOR EDUCATIONAL PURPOSE ONLY !!**
+***!! FOR EDUCATIONAL PURPOSE ONLY !!***
 
 ## SET UP
 
@@ -18,6 +17,19 @@ In Kali Linux, Open terminal and download Docker from [here](https://www.kali.or
 
 Download Docker-compose to run docker-compose.yml file, use [the referenece page](https://docs.docker.com/compose/install/linux/)
 
-## EXPLOIT 1
+Import the docker-compose file from this repository.
+
+Check out my youtube channel for videos of the exploits, [Video-cve-2019-6340](https://youtu.be/cwidnc2bmRE?si=5HTmwE9flUTuSxeR)
+
+or see below for images of the exploit.
+
+## EXPLOIT 1 
+
+### Tomcat ghostcat vulnerability
+
+Use container with tomcat from my docker-compose file [Tomcat]( 
+
+
+
 
 
