@@ -31,6 +31,16 @@ Use container with tomcat from my docker-compose file
 
 ![Screenshot 2023-11-08 224652-1](https://github.com/fara-jav/My_YML_File/assets/149855687/284b309e-07e4-4d7f-94a8-9c29e5c95deb)
 
+Open Metasploit, msfconsole 
+
+Search tomcat jserv
+
+![Screenshot 2023-11-08 224915](https://github.com/fara-jav/My_YML_File/assets/149855687/64f82e1e-3312-4146-bc40-c9e312943dfe)
+
+Next, check and configure options, then run the exploit as shown below 
+
+![Screenshot 2023-11-08 225034](https://github.com/fara-jav/My_YML_File/assets/149855687/19467679-b91c-40b9-9123-51d937921938)
+
 
 
 
