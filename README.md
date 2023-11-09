@@ -41,7 +41,9 @@ Next, check and configure options, then run the exploit as shown below
 
 ![Screenshot 2023-11-08 225034](https://github.com/fara-jav/My_YML_File/assets/149855687/19467679-b91c-40b9-9123-51d937921938)
 
+The following image shows the successful exploit by accessing the file from tomcat 
 
+![Screenshot 2023-11-08 225110](https://github.com/fara-jav/My_YML_File/assets/149855687/e3f3c4ac-0572-4bc7-97c7-702588eb595d)
 
 
 
